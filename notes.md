@@ -1,0 +1,3 @@
+# Dockerfiles
+* pinning base image versions: soemthing like alpine:3.21 means you will still get security patches when you rebuild. It might first point to 3.21.1, then later to 3.21.3 for example. 
+
