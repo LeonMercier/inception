@@ -3,3 +3,6 @@
 
 ## Compose
 * after changing Dockerfile, run 'docker compose build' and only after that 'docker compose up'
+
+## .dockerignore
+* only needed to protect files/dirs that are in the build path of compose
