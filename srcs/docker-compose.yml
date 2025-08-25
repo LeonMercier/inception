@@ -1,4 +1,5 @@
 volumes:
+
   mariadb:
     name: mariadb
     driver: local
@@ -7,22 +8,45 @@ volumes:
       o: bind
       device: ../volumes/mariadb
 
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts: 
+      type: none
+      o: bind
+      device: ../volumes/wordpress
+
 networks:
   dockernet:
     driver: bridge
 
 services:
+
   nginx:
     build: ./requirements/nginx/
     container_name: nginx
+    env_file: ".env"
     networks:
       - dockernet
     ports:
       - 8080:80
+    volumes:
+      - wordpress:/usr/share/webapps/wordpress
+
   mariadb:
     build: ./requirements/mariadb/
     container_name: mariadb
+    env_file: ".env"
     networks:
       - dockernet
     volumes:
       - mariadb:/var/lib/mariadb
+  
+  wordpress:
+    build: ./requirements/wordpress/
+    container_name: wordpress
+    env_file: ".env"
+    networks:
+      - dockernet
+    volumes:
+      - wordpress:/usr/share/webapps/wordpress
