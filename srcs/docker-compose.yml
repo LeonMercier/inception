@@ -1,7 +1,28 @@
+volumes:
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts: 
+      type: none
+      o: bind
+      device: ../volumes/mariadb
+
+networks:
+  dockernet:
+    driver: bridge
+
 services:
   nginx:
     build: ./requirements/nginx/
+    container_name: nginx
+    networks:
+      - dockernet
     ports:
       - 8080:80
   mariadb:
     build: ./requirements/mariadb/
+    container_name: mariadb
+    networks:
+      - dockernet
+    volumes:
+      - mariadb:/var/lib/mariadb

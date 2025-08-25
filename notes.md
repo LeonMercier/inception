@@ -6,3 +6,6 @@
 
 ## .dockerignore
 * only needed to protect files/dirs that are in the build path of compose
+
+## Other
+* containers can reach eachother on the bridge network using container names as hostnames
