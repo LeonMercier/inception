@@ -1,0 +1,5 @@
+[mariadbd]
+user = mariadbuser
+tmpdir = /tmp/mariadb
+datadir = /var/lib/mariadb
+socket = /run/mariadb/mariadb.sock

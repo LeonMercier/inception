@@ -3,3 +3,5 @@ services:
     build: ./requirements/nginx/
     ports:
       - 8080:80
+  mariadb:
+    build: ./requirements/mariadb/
