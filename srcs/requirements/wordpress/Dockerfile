@@ -1,11 +1,13 @@
 FROM alpine:3.21
 RUN apk update && apk add \
-	php82 \
-	fcgi \
-	php82-cgi \
-	wget \
-	mysql-client \
-	php82-mysqli
+	php83-fpm
+
+	# php83 \
+	# fcgi \
+	# php82-cgi \
+	# wget \
+	# mysql-client \
+	# php82-mysqli
 
 RUN mkdir -p /usr/share/webapps && \
 	cd /usr/share/webapps/ && \
@@ -16,4 +18,4 @@ RUN mkdir -p /usr/share/webapps && \
 RUN mkdir -p /var/www/localhost/htdocs/wordpress && \
 	ln -s /usr/share/webapps/wordpress/ /var/www/localhost/htdocs/wordpress
 
-CMD ["php-cgi82"]
+CMD ["php-fpm83", "-F"]

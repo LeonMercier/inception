@@ -22,17 +22,6 @@ networks:
 
 services:
 
-  nginx:
-    build: ./requirements/nginx/
-    container_name: nginx
-    env_file: ".env"
-    networks:
-      - dockernet
-    ports:
-      - 8080:80
-    volumes:
-      - wordpress:/usr/share/webapps/wordpress
-
   mariadb:
     build: ./requirements/mariadb/
     container_name: mariadb
@@ -50,3 +39,18 @@ services:
       - dockernet
     volumes:
       - wordpress:/usr/share/webapps/wordpress
+    depends_on: # TODO: use long syntax for service_healthy
+      - mariadb
+
+  nginx:
+    build: ./requirements/nginx/
+    container_name: nginx
+    env_file: ".env"
+    networks:
+      - dockernet
+    ports:
+      - 8080:80
+    volumes:
+      - wordpress:/usr/share/webapps/wordpress
+    depends_on:
+      - wordpress
