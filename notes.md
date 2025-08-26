@@ -9,3 +9,6 @@
 
 ## Other
 * containers can reach eachother on the bridge network using container names as hostnames
+
+## Scripts
+* To ensure we are running as PID 1: `#!/bin/sh exec nginx`

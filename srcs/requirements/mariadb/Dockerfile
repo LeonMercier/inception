@@ -14,4 +14,4 @@ RUN mkdir -p /tmp/mariadb && chown -R mariadbuser:mariadbuser /tmp/mariadb
 
 RUN mkdir -p /run/mariadb && chown -R mariadbuser:mariadbuser /run/mariadb
 
-CMD ["setup.sh"]
+CMD ["mariadb_setup.sh"]
