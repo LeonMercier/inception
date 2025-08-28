@@ -3,3 +3,5 @@ user = mariadbuser
 tmpdir = /tmp/mariadb
 datadir = /var/lib/mariadb
 socket = /run/mariadb/mariadb.sock
+pid-file = /run/mariadb/mariadb.pid
+basedir = /usr

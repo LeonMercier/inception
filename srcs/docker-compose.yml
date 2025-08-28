@@ -3,7 +3,7 @@ volumes:
   mariadb:
     name: mariadb
     driver: local
-    driver_opts: 
+    driver_opts:
       type: none
       o: bind
       device: ../volumes/mariadb
@@ -11,7 +11,7 @@ volumes:
   wordpress:
     name: wordpress
     driver: local
-    driver_opts: 
+    driver_opts:
       type: none
       o: bind
       device: ../volumes/wordpress
@@ -26,15 +26,17 @@ services:
     build: ./requirements/mariadb/
     container_name: mariadb
     env_file: ".env"
+    restart: on-failure
     networks:
       - dockernet
     volumes:
       - mariadb:/var/lib/mariadb
-  
+
   wordpress:
     build: ./requirements/wordpress/
     container_name: wordpress
     env_file: ".env"
+    restart: on-failure
     networks:
       - dockernet
     volumes:
@@ -46,11 +48,14 @@ services:
     build: ./requirements/nginx/
     container_name: nginx
     env_file: ".env"
+    restart: on-failure
     networks:
       - dockernet
-    ports:
-      - 8080:80
     volumes:
       - wordpress:/usr/share/webapps/wordpress
     depends_on:
       - wordpress
+    # the only exposed port in the whole thing
+    # has to be quoted to avoid conflict with YAML base-60 format
+    ports:
+      - "443:443" 
