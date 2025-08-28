@@ -1,5 +1,8 @@
 FROM alpine:3.21
-RUN apk update && apk add mariadb
+
+# mariadb-client is for mariadb-admin for healthcheck
+RUN apk update && apk add mariadb mariadb-client
+
 
 COPY config /etc/my.cnf.d/mariadb-server.cnf
 

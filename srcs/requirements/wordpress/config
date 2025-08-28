@@ -1,0 +1,4 @@
+[www]
+user = wpuser
+group = wpuser
+listen = 9000

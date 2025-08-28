@@ -1,3 +1,5 @@
+# TODO: volumes have to be in /home/lemercie/data
+
 volumes:
 
   mariadb:
@@ -25,12 +27,24 @@ services:
   mariadb:
     build: ./requirements/mariadb/
     container_name: mariadb
-    env_file: ".env"
+    env_file: "./.env"
     restart: on-failure
     networks:
       - dockernet
     volumes:
       - mariadb:/var/lib/mariadb
+    # CMD-SHELL is used so that we get variable expansion
+    # double dollar sign so that the variable doesnt get expanded here but in
+    # the container shell
+    # TODO: use secrets for passwords
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping --user=$$DB_USER --password=$$DB_USER_PW --host=127.0.0.1 --protocol=tcp" ]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+      start_interval: 5s
+
 
   wordpress:
     build: ./requirements/wordpress/
@@ -41,8 +55,9 @@ services:
       - dockernet
     volumes:
       - wordpress:/usr/share/webapps/wordpress
-    depends_on: # TODO: use long syntax for service_healthy
-      - mariadb
+    depends_on:
+      mariadb: 
+        condition: service_healthy
 
   nginx:
     build: ./requirements/nginx/
