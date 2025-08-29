@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# this is where out volume is mounted
 cd /usr/share/webapps/wordpress
 
 # www-data does not have a login shell for security reasons, therefore we cannot 
@@ -21,7 +22,20 @@ if [ ! -f wp-config.php ]; then
 		--dbpass=$DB_USER_PW \
 		--dbhost=mariadb:3306
 
-
+	wp core install \
+		--allow-root \
+		--url=$WP_URL \
+		--title=$WP_SITE_TITLE \
+		--admin_user=$WP_ADMIN \
+		--admin_password=$WP_ADMIN_PW \
+		--admin_email=$WP_ADMIN_EMAIL
+	# admin emain needed?
+	#
+	wp user create
+		--allow-root \
+		--path=/usr/share/webapps/wordpress \
+		$WP_USER \
+		--user_pass=$WP_USER_PW
 fi
 
 echo "DONEEEEEEE"

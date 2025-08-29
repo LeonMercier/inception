@@ -12,3 +12,8 @@
 
 ## Scripts
 * To ensure we are running as PID 1: `#!/bin/sh exec nginx`
+
+## Wordpress config
+* without 'pm = dynamic' (or some other value); we get "the process manager is missing"
+* without pm.max_children; "pm.max_children must be a positive value"
+* "pm.min_spare_servers(0) must be a positive value"

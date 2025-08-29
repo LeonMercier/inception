@@ -1,4 +1,7 @@
 [www]
-user = wpuser
-group = wpuser
 listen = 9000
+pm = dynamic
+pm.max_children = 6 ; needs to be set at least when pm is dynamic
+pm.min_spare_servers = 1 ; basically min number of children to keep idle
+pm.max_spare_servers = 1 ; basically max number of children to keep idle
+pm.start_servers = 1 ; children at start, creates notice if not set

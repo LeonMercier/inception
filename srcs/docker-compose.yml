@@ -47,8 +47,18 @@ services:
 
 
   wordpress:
-    build: ./requirements/wordpress/
+    build:
+      context: ./requirements/wordpress/
+      args:
+        WEB_USER: ${WEB_USER}
+        WEB_GROUP: ${WEB_GROUP}
     container_name: wordpress
+    # stuff in the file pointed by 'env_file' is available during container 
+    # runtime, NOT during build time, i.e. in the Dockerfile
+    # hence we use ARGS
+    # but the wy we use ARGS only works if there is a file called ".env" in the
+    # same dir as the compose file, NOT with an arbitrary env_file
+    # what a mess
     env_file: ".env"
     restart: on-failure
     networks:
@@ -60,7 +70,11 @@ services:
         condition: service_healthy
 
   nginx:
-    build: ./requirements/nginx/
+    build:
+      context: ./requirements/nginx/
+      args:
+        WEB_USER: ${WEB_USER}
+        WEB_GROUP: ${WEB_GROUP}
     container_name: nginx
     env_file: ".env"
     restart: on-failure
