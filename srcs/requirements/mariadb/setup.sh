@@ -1,6 +1,5 @@
 #!/bin/sh
 
-echo "mariadb setup $DB_USER"
 # mariadb-install-db creates a folder called 'mysql' in the datadir
 # "if directory doesn't exist"
 if [ ! -d "/var/lib/mariadb/mysql" ]; then
