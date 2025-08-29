@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# this is where out volume is mounted
+# this is where our volume is mounted
+chown -R $WEB_USER:$WEB_GROUP /usr/share/webapps/wordpress
 cd /usr/share/webapps/wordpress
 
 # www-data does not have a login shell for security reasons, therefore we cannot 

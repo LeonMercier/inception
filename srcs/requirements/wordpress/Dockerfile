@@ -42,7 +42,7 @@ RUN addgroup -S $WEB_GROUP
 RUN adduser -D -H -s /sbin/nologin -G $WEB_USER $WEB_GROUP
 
 # why does this need to be here and in the script? without this we get a 403...
-RUN chown -R $WEB_USER:$WEB_GROUP /usr/share/webapps/wordpress
+RUN chown -R ${WEB_USER}:${WEB_GROUP} /usr/share/webapps/wordpress
 
 CMD ["wordpress_setup.sh"]
 
