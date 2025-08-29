@@ -29,14 +29,16 @@ if [ ! -f wp-config.php ]; then
 		--admin_user=$WP_ADMIN \
 		--admin_password=$WP_ADMIN_PW \
 		--admin_email=$WP_ADMIN_EMAIL
-	# admin emain needed?
-	#
-	wp user create
-		--allow-root \
-		--path=/usr/share/webapps/wordpress \
+	
+	wp user create \
 		$WP_USER \
+		$WP_USER_EMAIL \
+		--path=/usr/share/webapps/wordpress \
 		--user_pass=$WP_USER_PW
 fi
 
-echo "DONEEEEEEE"
+# this needs to be done here, in addition to dockerfile because the 'wp'
+# commands run as root and create the files for the site
+chown -R $WEB_USER:$WEB_GROUP /usr/share/webapps/wordpress
+
 exec php-fpm83 -F
