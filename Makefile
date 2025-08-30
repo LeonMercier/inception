@@ -1,8 +1,7 @@
 VOLUME_DIR=~/data/dockervolumes
 COMPOSE_FILE=./srcs/docker-compose.yml
 
-# all: wordpress_vol mariadb_vol
-all:
+all: wordpress_vol mariadb_vol
 	make up
 
 up: build
@@ -26,10 +25,10 @@ fclean: clean
 re: fclean
 	make all
 
-# wordpress_vol:
-# 	mkdir -p $(VOLUME_DIR)/wordpress
-#
-# mariadb_vol:
-# 	mkdir -p $(VOLUME_DIR)/mariadb
+wordpress_vol:
+	mkdir -m 777 -p $(VOLUME_DIR)/wordpress
+
+mariadb_vol:
+	mkdir -m 777 -p $(VOLUME_DIR)/mariadb
 
 .PHONY: all up build down clean fclean re wordpress_vol mariadb_vol
