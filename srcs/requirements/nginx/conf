@@ -8,7 +8,7 @@ http {
 
 	server {
 
-#		server_name = lemercie.42.fr; #TODO get from variable
+		server_name = lemercie.42.fr; #TODO get from variable
 		root /usr/share/webapps/wordpress/;
 
 		listen *:443 ssl;

@@ -26,7 +26,8 @@ RUN echo "user $WEB_USER $WEB_GROUP;" >> /etc/nginx/nginx.conf
 # -s /sbin/nologin: you cannot login as this user
 RUN addgroup -S $WEB_GROUP
 RUN adduser -D -H -s /sbin/nologin -G $WEB_GROUP $WEB_USER
-
+RUN mkdir -p /usr/share/webapps/wordpress
+RUN chown -R $WEB_USER:$WEB_GROUP /usr/share/webapps/wordpress
 CMD ["nginx", "-g", "daemon off;"]
 
 # more like documentation, compose file actually exposes the port
