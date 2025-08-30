@@ -19,7 +19,7 @@ RUN openssl req -x509 \
 ARG WEB_USER
 ARG WEB_GROUP
 COPY conf /etc/nginx/nginx.conf
-RUN echo "user $WEB_USER;" >> /etc/nginx/nginx.conf
+RUN echo "user $WEB_USER $WEB_GROUP;" >> /etc/nginx/nginx.conf
 
 # -D: no password
 # -H: no home
