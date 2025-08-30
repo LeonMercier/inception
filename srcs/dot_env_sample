@@ -2,3 +2,16 @@ DB_NAME=xxx
 DB_USER=xxx
 DB_USER_PW=xxx
 DB_ROOT_PW=xxx
+
+WP_URL=lemercie.42.fr
+WP_SITE_TITLE=hello_this_is_my_site_title
+WP_ADMIN=xxx
+WP_ADMIN_PW=xxx
+WP_ADMIN_EMAIL=xxx
+WP_USER=xxx
+WP_USER_PW=xxx
+WP_USER_EMAIL=xxx
+
+WEB_USER=xxx
+WEB_GROUP=xxx
+
