@@ -39,7 +39,7 @@ RUN mkdir -p /usr/share/webapps/wordpress
 # adduser seems to create homedir with correct permissions without any chown
 # -D -H no password, no home
 RUN addgroup -S $WEB_GROUP
-RUN adduser -D -H -s /sbin/nologin -G $WEB_USER $WEB_GROUP
+RUN adduser -D -H -s /sbin/nologin -G $WEB_GROUP $WEB_USER 
 
 # why does this need to be here and in the script? without this we get a 403...
 RUN chown -R ${WEB_USER}:${WEB_GROUP} /usr/share/webapps/wordpress
