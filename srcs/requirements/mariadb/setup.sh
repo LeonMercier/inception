@@ -24,8 +24,8 @@ if [ ! -d "/var/lib/mariadb/mysql" ]; then
 		CREATE DATABASE $DB_NAME;
 		CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_USER_PW';
 		CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_USER_PW';
-		GRANT ALL PRIVILEGES ON $DB_NAME.* TO 'wpdb_user'@'%';
-		GRANT ALL PRIVILEGES ON $DB_NAME.* TO 'wpdb_user'@'localhost';
+		GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';
+		GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';
 		FLUSH PRIVILEGES;
 	EOF
 fi
