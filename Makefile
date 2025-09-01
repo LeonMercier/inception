@@ -4,8 +4,11 @@ COMPOSE_FILE=./srcs/docker-compose.yml
 all: wordpress_vol mariadb_vol
 	make up
 
-up: build
+up: .built
 	docker compose -f $(COMPOSE_FILE) up -d
+
+.built: build
+	touch .built
 
 build:
 	docker compose -f $(COMPOSE_FILE) build
