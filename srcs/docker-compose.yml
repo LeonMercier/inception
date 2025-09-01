@@ -41,7 +41,7 @@ services:
     container_name: mariadb
     image: mariadb
     env_file: "./.env"
-    restart: unless_stopped
+    restart: unless-stopped
     networks:
       - dockernet
     volumes:
@@ -77,7 +77,7 @@ services:
     # same dir as the compose file, NOT with an arbitrary env_file
     # what a mess
     env_file: ".env"
-    restart: unless_stopped
+    restart: unless-stopped
     networks:
       - dockernet
     volumes:
@@ -100,7 +100,7 @@ services:
     container_name: nginx
     image: nginx
     env_file: ".env"
-    restart: unless_stopped
+    restart: unless-stopped
     networks:
       - dockernet
     volumes:
