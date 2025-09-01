@@ -20,6 +20,7 @@ down:
 # does work even when the stack is not up
 clean: 
 	docker compose -f $(COMPOSE_FILE) down --rmi all
+	rm -fr .built
 
 fclean: clean
 	docker compose -f $(COMPOSE_FILE) down -v
