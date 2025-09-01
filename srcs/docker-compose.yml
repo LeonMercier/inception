@@ -25,6 +25,7 @@ networks:
 services:
 
   mariadb:
+    init: true
     build: ./requirements/mariadb/
     container_name: mariadb
     image: mariadb
@@ -48,6 +49,7 @@ services:
 
 
   wordpress:
+    init: true
     build:
       context: ./requirements/wordpress/
       args:
@@ -72,6 +74,7 @@ services:
         condition: service_healthy
 
   nginx:
+    init: true
     build:
       context: ./requirements/nginx/
       args:
