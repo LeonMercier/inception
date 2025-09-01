@@ -24,7 +24,7 @@ clean:
 
 fclean: clean
 	docker compose -f $(COMPOSE_FILE) down -v
-	rm -fr $(VOLUME_DIR)/*
+	sudo rm -fr $(VOLUME_DIR)/*
 
 re: fclean
 	make all
