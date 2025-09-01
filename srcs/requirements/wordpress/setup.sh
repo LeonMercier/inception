@@ -12,7 +12,12 @@ cd /usr/share/webapps/wordpress
 if [ ! -f wp-config.php ]; then
 	echo "configuring wordpress"
 
-	#TODO: check that mariadb is up?
+	# healthcheck for mariadb is in the compose file so we will just assume 
+	# here that it is already up
+	
+	db_user_pw=$(cat /run/secrets/db_user_pw)
+	user_pw=$(cat /run/secrets/wp_user_pw)
+	admin_pw=$(cat /run/secrets/wp_root_pw)
 
 	wp core download --allow-root --version=6.8.2
 
@@ -20,7 +25,7 @@ if [ ! -f wp-config.php ]; then
 		--allow-root \
 		--dbname=$DB_NAME \
 		--dbuser=$DB_USER \
-		--dbpass=$DB_USER_PW \
+		--dbpass=$db_user_pw \
 		--dbhost=mariadb:3306
 
 	wp core install \
@@ -28,14 +33,14 @@ if [ ! -f wp-config.php ]; then
 		--url=$WP_URL \
 		--title=$WP_SITE_TITLE \
 		--admin_user=$WP_ADMIN \
-		--admin_password=$WP_ADMIN_PW \
+		--admin_password=$admin_pw \
 		--admin_email=$WP_ADMIN_EMAIL
 	
 	wp user create \
 		$WP_USER \
 		$WP_USER_EMAIL \
 		--path=/usr/share/webapps/wordpress \
-		--user_pass=$WP_USER_PW
+		--user_pass=$user_pw
 fi
 
 # this needs to be done here, in addition to dockerfile because the 'wp'

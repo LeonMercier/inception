@@ -17,13 +17,16 @@ if [ ! -d "/var/lib/mariadb/mysql" ]; then
 	#
 	# hyphen after << means heredoc will strip leading whitespace => we can 
 	# indent our heredoc nicely
+	
+	user_pw=$(cat /run/secrets/db_user_pw)
+	root_pw=$(cat /run/secrets/db_root_pw)
 	mariadbd --bootstrap --user=mariadbuser <<- EOF
 		USE mysql;
 		FLUSH PRIVILEGES;
-		ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PW';
+		ALTER USER 'root'@'localhost' IDENTIFIED BY '$root_pw';
 		CREATE DATABASE $DB_NAME;
-		CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_USER_PW';
-		CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_USER_PW';
+		CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$user_pw';
+		CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$user_pw';
 		GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';
 		GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';
 		FLUSH PRIVILEGES;
