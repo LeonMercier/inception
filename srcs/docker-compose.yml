@@ -24,13 +24,13 @@ networks:
 
 secrets:
   db_user_pw:
-    file: db_user_pw.txt
+    file: secrets/db_user_pw.txt
   db_root_pw:
-    file: db_root_pw.txt
+    file: secrets/db_root_pw.txt
   wp_user_pw:
-    file: wp_user_pw.txt
+    file: secrets/wp_user_pw.txt
   wp_root_pw:
-    file: wp_root_pw.txt
+    file: secrets/wp_root_pw.txt
 
 
 services:
