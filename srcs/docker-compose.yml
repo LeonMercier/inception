@@ -40,6 +40,7 @@ services:
     build: ./requirements/mariadb/
     container_name: mariadb
     image: mariadb
+    pull_policy: build
     env_file: "./.env"
     restart: unless-stopped
     networks:
@@ -70,6 +71,7 @@ services:
         WEB_GROUP: ${WEB_GROUP}
     container_name: wordpress
     image: wordpress
+    pull_policy: build
     # stuff in the file pointed by 'env_file' is available during container 
     # runtime, NOT during build time, i.e. in the Dockerfile
     # hence we use ARGS
@@ -99,6 +101,7 @@ services:
         WEB_GROUP: ${WEB_GROUP}
     container_name: nginx
     image: nginx
+    pull_policy: build
     env_file: ".env"
     restart: unless-stopped
     networks:
